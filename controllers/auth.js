@@ -30,8 +30,23 @@ module.exports = {
       .catch(err => ctx.throw(err));
   },
 
-  login: (ctx, next) => {
+  viaUsername: (ctx, next) => {
     return passport.authenticate('local', (err, user, info) => {
+      if (!!err) ctx.throw(500, err);
+
+      if (user === false) {
+        ctx.status = 401;
+        ctx.body = info;
+      } else {
+        ctx.body = user;
+      }
+    })(ctx, next);
+  },
+
+  viaPhone: (ctx, next) => {
+    return passport.authenticate('phone', (err, user, info) => {
+      if (!!err) ctx.throw(500, err);
+
       if (user === false) {
         ctx.status = 401;
         ctx.body = info;

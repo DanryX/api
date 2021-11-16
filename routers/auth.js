@@ -8,7 +8,8 @@ const router = new Router({ prefix: '/auth' });
 
 router
   .post('/registration', koaBody({ multipart: true }), AuthController.registration)
-  .post('/login', AuthController.login)
+  .post('/via-username', AuthController.viaUsername)
+  .post('/via-phone', AuthController.viaPhone)
   // .get('/refresh', AuthController.refresh)
   .get('/health', authJwt(), AuthController.health);
 

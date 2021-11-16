@@ -8,7 +8,7 @@ module.exports = {
       {
         username: 'admin',
         email: 'admin@test.com',
-        phone: '+79991234567',
+        phone: '79991234567',
         password: await bcrypt.hash('123456', 10),
         role: 'admin',
         language: 'ru',
@@ -18,7 +18,7 @@ module.exports = {
       {
         username: 'test',
         email: 'test@test.com',
-        phone: '+79991112233',
+        phone: '79991112233',
         password: await bcrypt.hash('123', 10),
         role: 'user',
         language: 'ru',
