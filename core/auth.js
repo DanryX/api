@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const passport = require('koa-passport');
 const LocalStrategy = require('passport-local');
 const JwtStrategy = require('passport-jwt').Strategy;
@@ -28,8 +30,8 @@ const localAuth = (identifier, password, done) => {
         if (!result) return done(null, false, { message: 'Incorrect identifier or password.' });
 
         const tokens = {
-          accessToken: jwt.sign({ id: user.id }, 'super_secret', { expiresIn: '1d' }),
-          refreshToken: jwt.sign({ email: user.email }, 'super_secret', { expiresIn: '1d' })
+          accessToken: jwt.sign({ id: user.id }, process.env.SECRET, { expiresIn: '1d' }),
+          refreshToken: jwt.sign({ email: user.email }, process.env.SECRET, { expiresIn: '1m' })
         };
 
         return done(null, { ...pick(user, ['id', Object.keys(identifier)[0]]), ...tokens });
@@ -41,7 +43,7 @@ const localAuth = (identifier, password, done) => {
 
 const opts = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: 'super_secret',
+  secretOrKey: process.env.SECRET,
   ignoreExpiration: false
 };
 
