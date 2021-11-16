@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { pick } = require('lodash');
 
-const { models: { User, Role } } = require('./db');
+const { models: { User, Role, UserProfile } } = require('./db');
 
 passport.use(new LocalStrategy({ session: false }, (username, password, done) => {
   User.findOne({ where: { username }})
@@ -38,7 +38,7 @@ const opts = {
 };
 
 passport.use(new JwtStrategy(opts, (payload, done) => {
-  User.findOne({ where: { id: payload.id }, include: { model: Role } })
+  User.findOne({ where: { id: payload.id }, include: [ { model: Role }, { model: UserProfile } ] })
     .then(user => done(null, !!user ? user.toJSON() : false))
     .catch(err => done(err));
 }));

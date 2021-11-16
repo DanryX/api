@@ -9,11 +9,13 @@ module.exports = {
         allowNull: false,
         unique: true
       },
+
       title: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true
       },
+
       permissions: {
         type: Sequelize.TEXT
       }

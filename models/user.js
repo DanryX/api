@@ -28,18 +28,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING()
     },
 
-    firstName: {
-      type: DataTypes.STRING
-    },
-
-    lastName: {
-      type: DataTypes.STRING
-    },
-
-    patronymic: {
-      type: DataTypes.STRING
-    },
-
     role: {
       type: DataTypes.STRING,
       references: {
@@ -47,6 +35,10 @@ module.exports = (sequelize, DataTypes) => {
         key: 'name'
       },
       allowNull: false
+    },
+
+    language: {
+      type: DataTypes.STRING
     },
 
     active: {
@@ -72,6 +64,7 @@ module.exports = (sequelize, DataTypes) => {
 
   User.associate = (models) => {
     User.belongsTo(models.Role, { foreignKey: 'role', targetKey: 'name' });
+    User.hasOne(models.UserProfile, { foreignKey: 'userId' });
   };
 
   return User;

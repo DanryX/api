@@ -9,7 +9,8 @@ module.exports = {
     let { user } = ctx.state;
 
     user['permissions'] =  user.Role.permissions;
+    user['profile'] =  omit(user.UserProfile, ['userId']);
 
-    ctx.body = omit(user, ['password', 'Role']);
+    ctx.body = omit(user, ['password', 'Role', 'UserProfile']);
   }
 }

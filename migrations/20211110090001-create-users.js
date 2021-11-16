@@ -32,18 +32,6 @@ module.exports = {
         allowNull: false
       },
 
-      firstName: {
-        type: Sequelize.STRING
-      },
-
-      lastName: {
-        type: Sequelize.STRING
-      },
-
-      patronymic: {
-        type: Sequelize.STRING
-      },
-
       role: {
         type: Sequelize.STRING,
         references: {
@@ -51,6 +39,10 @@ module.exports = {
           key: 'name'
         },
         allowNull: false
+      },
+
+      language: {
+        type: Sequelize.STRING
       },
 
       active: {
