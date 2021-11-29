@@ -5,7 +5,7 @@ const config = require('../config/openapi');
 
 const options = {
   definition: config,
-  apis: ['./controllers/*.js']
+  apis: ['./openapi/*.js']
 };
 
 const openapiSpecification = swaggerJSDoc(options);
