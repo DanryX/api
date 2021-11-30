@@ -24,6 +24,8 @@
  * 
  *     Unauthorized:
  *       description: "Unauthorized"
+ *     NoPermission:
+ *       description: "No Permission"
  *     Error:
  *       description: "Error"
  *       content:

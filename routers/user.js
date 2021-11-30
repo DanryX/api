@@ -7,6 +7,7 @@ const router = new Router({ prefix: '/user' });
 
 router
   .get('/', UserController.main)
-  .get('/me', authJwt(['base:view', 'all:view']), UserController.me);
+  .get('/me', authJwt(['all:view', 'base:view']), UserController.me)
+  .get('/roles', authJwt(['all:view', 'roles:view']), UserController.roles);
 
 module.exports = router;
