@@ -7,6 +7,7 @@ const router = new Router();
 
 router
   .get('/', CommonController.main)
+  .post('/mail', CommonController.mail)
   .get('/docs/openapi.json', openapi);
 
 module.exports = router;

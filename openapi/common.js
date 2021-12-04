@@ -1,6 +1,25 @@
 /**
  * @swagger
  * components:
+ *   requestBodies:
+ *     MailBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: "object"
+ *             required:
+ *               - "username"
+ *               - "password"
+ *             properties:
+ *               to:
+ *                 type: string
+ *               subject:
+ *                 type: string
+ *               html:
+ *                 type: string
+ *               text:
+ *                 type: string
  *   responses:
  *     Success:
  *       description: "Success"
@@ -39,4 +58,25 @@
  *                 type: "integer"
  *               message:
  *                 type: "string"
+ */
+
+/**
+ * @swagger
+ * tags:
+ *   - name: Common
+ * 
+ * /mail:
+ *   post:
+ *     tags: [ Common ]
+ *     security: []
+ *     requestBody:
+ *       $ref: '#/components/requestBodies/MailBody'
+ *     responses:
+ *       200:
+ *         $ref: '#/components/responses/Success'
+ *       400:
+ *         $ref: '#/components/responses/BadRequest'
+ *       500:
+ *         $ref: '#/components/responses/Error'
+ * 
  */

@@ -3,6 +3,7 @@ require('dotenv').config();
 const Koa = require('koa');
 const logger = require('koa-logger');
 const koaBody = require('koa-body');
+const mail = require('./core/mail');
 const router = require('./routers/');
 const passport = require('./core/auth');
 const sequelize = require('./core/db');
@@ -17,6 +18,7 @@ if (!isProduction) {
 }
 
 app.use(koaBody({ multipart: true }));
+app.use(mail());
 app.use(router());
 app.use(passport.initialize());
 app.use(swagger);
