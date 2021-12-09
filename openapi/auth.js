@@ -48,6 +48,26 @@
  *                 type: string
  *               password:
  *                 type: string
+ *     ForgotBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: "object"
+ *             properties:
+ *               email:
+ *                 type: string
+ *               phone:
+ *                 type: string
+ *     resetPasswordBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: "object"
+ *             properties:
+ *               password:
+ *                 type: string
  *   responses:
  *     RegistrationResult:
  *       description: "Success"
@@ -100,6 +120,17 @@
  *                 type: "string"
  *               refreshToken:
  *                 type: "string"
+ *     ForgotResult:
+ *       description: "Success"
+ *       content:
+ *         "application/json":
+ *           schema:
+ *             type: "object"
+ *             required:
+ *               - "link"
+ *             properties:
+ *               link:
+ *                 type: "string"
 */
 
 /**
@@ -144,6 +175,54 @@
  *         $ref: '#/components/responses/ViaPhoneResult'
  *       400:
  *         $ref: '#/components/responses/BadRequest'
+ *       500:
+ *         $ref: '#/components/responses/Error'
+ * 
+ * /auth/forgot:
+ *   post:
+ *     tags: [ Auth ]
+ *     security: []
+ *     requestBody:
+ *       $ref: '#/components/requestBodies/ForgotBody'
+ *     responses:
+ *       200:
+ *         $ref: '#/components/responses/ForgotResult'
+ *       400:
+ *         $ref: '#/components/responses/BadRequest'
+ *       500:
+ *         $ref: '#/components/responses/Error'
+ * 
+ * /auth/reset-password/{token}:
+ *   get:
+ *     tags: [ Auth ]
+ *     security: []
+ *     parameters:
+ *       - in: "path"
+ *         name: "token"
+ *         type: "string"
+ *         required: true
+ *     responses:
+ *       200:
+ *         $ref: '#/components/responses/Success'
+ *       401:
+ *         $ref: '#/components/responses/Unauthorized'
+ *   post:
+ *     tags: [ Auth ]
+ *     security: []
+ *     parameters:
+ *       - in: "path"
+ *         name: "token"
+ *         type: "string"
+ *         required: true
+ *     requestBody:
+ *       $ref: '#/components/requestBodies/resetPasswordBody'
+ *     responses:
+ *       200:
+ *         $ref: '#/components/responses/Success'
+ *       400:
+ *         $ref: '#/components/responses/BadRequest'
+ *       401:
+ *         $ref: '#/components/responses/Unauthorized'
  *       500:
  *         $ref: '#/components/responses/Error'
  * 

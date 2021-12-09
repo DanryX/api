@@ -28,6 +28,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING()
     },
 
+    reset: {
+      type: DataTypes.STRING
+    },
+
+    resetExpire: {
+      type: DataTypes.DATE
+    },
+
     role: {
       type: DataTypes.STRING,
       references: {

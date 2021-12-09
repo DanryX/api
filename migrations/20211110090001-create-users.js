@@ -32,6 +32,14 @@ module.exports = {
         allowNull: false
       },
 
+      reset: {
+        type: Sequelize.STRING
+      },
+
+      resetExpire: {
+        type: Sequelize.DATE
+      },
+
       role: {
         type: Sequelize.STRING,
         references: {
