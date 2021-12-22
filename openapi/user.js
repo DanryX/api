@@ -87,6 +87,7 @@
  * 
  * /user/me:
  *   get:
+ *     operationId: 'userMeGet'
  *     tags: [ User ]
  *     responses:
  *       200:
@@ -100,6 +101,7 @@
  * 
  * /user/roles:
  *   get:
+ *     operationId: 'userRolesGet'
  *     tags: [ User ]
  *     responses:
  *       200:

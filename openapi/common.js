@@ -7,19 +7,7 @@
  *       content:
  *         application/json:
  *           schema:
- *             type: "object"
- *             required:
- *               - "username"
- *               - "password"
- *             properties:
- *               to:
- *                 type: string
- *               subject:
- *                 type: string
- *               html:
- *                 type: string
- *               text:
- *                 type: string
+ *             $ref: '#/components/schemas/Mail'
  *   responses:
  *     Success:
  *       description: "Success"
@@ -40,7 +28,6 @@
  *                 type: "integer"
  *               message:
  *                 type: "string"
- * 
  *     Unauthorized:
  *       description: "Unauthorized"
  *     NoPermission:
@@ -58,6 +45,21 @@
  *                 type: "integer"
  *               message:
  *                 type: "string"
+ *   schemas:
+ *     Mail:
+ *       type: "object"
+ *       required:
+ *         - "username"
+ *         - "password"
+ *       properties:
+ *         to:
+ *           type: string
+ *         subject:
+ *           type: string
+ *         html:
+ *           type: string
+ *         text:
+ *           type: string
  */
 
 /**
@@ -67,6 +69,7 @@
  * 
  * /mail:
  *   post:
+ *     operationId: 'mailPost'
  *     tags: [ Common ]
  *     security: []
  *     requestBody:

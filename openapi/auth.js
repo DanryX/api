@@ -9,65 +9,31 @@
  *       content:
  *         application/json:
  *           schema:
- *             type: "object"
- *             required:
- *               - "username"
- *               - "password"
- *             properties:
- *               username:
- *                 type: string
- *               email:
- *                 type: string
- *               password:
- *                 type: string
+ *             $ref: '#/components/schemas/Registration'
  *     ViaUsernameBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             type: "object"
- *             required:
- *               - "username"
- *               - "password"
- *             properties:
- *               username:
- *                 type: string
- *               password:
- *                 type: string
+ *             $ref: '#/components/schemas/ViaUsername'
  *     ViaPhoneBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             type: "object"
- *             required:
- *               - "phone"
- *               - "password"
- *             properties:
- *               phone:
- *                 type: string
- *               password:
- *                 type: string
+ *             $ref: '#/components/schemas/ViaPhone'
  *     ForgotBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             type: "object"
- *             properties:
- *               email:
- *                 type: string
- *               phone:
- *                 type: string
- *     resetPasswordBody:
+ *             $ref: '#/components/schemas/Forgot'
+ *     ResetPasswordBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             type: "object"
- *             properties:
- *               password:
- *                 type: string
+ *             $ref: '#/components/schemas/ResetPassword'
  *   responses:
  *     RegistrationResult:
  *       description: "Success"
@@ -131,6 +97,51 @@
  *             properties:
  *               link:
  *                 type: "string"
+ *   schemas:
+ *     Registration:
+ *       type: "object"
+ *       required:
+ *         - "username"
+ *         - "password"
+ *       properties:
+ *         username:
+ *           type: string
+ *         email:
+ *           type: string
+ *         password:
+ *           type: string
+ *     ViaUsername:
+ *       type: "object"
+ *       required:
+ *         - "username"
+ *         - "password"
+ *       properties:
+ *         username:
+ *           type: string
+ *         password:
+ *           type: string
+ *     ViaPhone:
+ *       type: "object"
+ *       required:
+ *         - "phone"
+ *         - "password"
+ *       properties:
+ *         phone:
+ *           type: string
+ *         password:
+ *           type: string
+ *     Forgot:
+ *       type: "object"
+ *       properties:
+ *         email:
+ *           type: string
+ *         phone:
+ *           type: string
+ *     ResetPassword:
+ *       type: "object"
+ *       properties:
+ *         password:
+ *           type: string
 */
 
 /**
@@ -138,6 +149,7 @@
  * 
  * /auth/registration:
  *   post:
+ *     operationId: 'authRegistrationPost'
  *     tags: [ Auth ]
  *     security: []
  *     requestBody:
@@ -152,6 +164,7 @@
  * 
  * /auth/via-username:
  *   post:
+ *     operationId: 'authViaUsernamePost'
  *     tags: [ Auth ]
  *     security: []
  *     requestBody:
@@ -166,6 +179,7 @@
  * 
  * /auth/via-phone:
  *   post:
+ *     operationId: 'authViaPhonePost'
  *     tags: [ Auth ]
  *     security: []
  *     requestBody:
@@ -180,6 +194,7 @@
  * 
  * /auth/forgot:
  *   post:
+ *     operationId: 'authForgotPost'
  *     tags: [ Auth ]
  *     security: []
  *     requestBody:
@@ -194,12 +209,14 @@
  * 
  * /auth/reset-password/{token}:
  *   get:
+ *     operationId: 'authResetPasswordTokenGet'
  *     tags: [ Auth ]
  *     security: []
  *     parameters:
  *       - in: "path"
  *         name: "token"
- *         type: "string"
+ *         schema:
+ *           type: "string"
  *         required: true
  *     responses:
  *       200:
@@ -207,15 +224,17 @@
  *       401:
  *         $ref: '#/components/responses/Unauthorized'
  *   post:
+ *     operationId: 'authResetPasswordTokenPost'
  *     tags: [ Auth ]
  *     security: []
  *     parameters:
  *       - in: "path"
  *         name: "token"
- *         type: "string"
+ *         schema:
+ *           type: "string"
  *         required: true
  *     requestBody:
- *       $ref: '#/components/requestBodies/resetPasswordBody'
+ *       $ref: '#/components/requestBodies/ResetPasswordBody'
  *     responses:
  *       200:
  *         $ref: '#/components/responses/Success'
@@ -228,6 +247,7 @@
  * 
  * /auth/health:
  *   get:
+ *     operationId: 'authHealthGet'
  *     tags: [ Auth ]
  *     description: Checking token health status.
  *     responses:
